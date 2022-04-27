@@ -11,7 +11,7 @@ This is a document management project for LaTeX.
 └── template
     ├── Makefile
     └── src
-        └── template.
+        └── templ
 ```
 
 ---
