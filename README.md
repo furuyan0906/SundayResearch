@@ -5,12 +5,14 @@ This is a document management project for LaTeX.
 ---
 ### Architecture
 
+```
 -.
 ├─ README.md
 └── template
     ├── Makefile
     └── src
         └── template.
+```
 
 ---
 ### How to use
