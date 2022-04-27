@@ -6,12 +6,12 @@ This is a document management project for LaTeX.
 ### Architecture
 
 ```
--.
-├─ README.md
+.
+├── README.md
 └── template
     ├── Makefile
     └── src
-        └── templ
+        └── template.tex
 ```
 
 ---
