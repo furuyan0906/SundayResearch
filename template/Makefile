@@ -29,7 +29,7 @@ DVI2PDF := dvipdfmx
 
 MKDIR = mkdir -p
 RM := rm -rf
-OPEN := gv
+OPEN := evince
 
 
 # -------------------------------------------------
