@@ -29,22 +29,22 @@ DVI2PDF := dvipdfmx
 
 MKDIR = mkdir -p
 RM := rm -rf
-OPEN := evince
+OPEN := gv
 
 
 # -------------------------------------------------
-.PHONY: target clean open
+.PHONY: doc clean open
 
-all: target
+all: doc open
 
-target: $(OBJ_DIR) $(OBJS) $(DOC_DIR)
+doc: $(OBJ_DIR) $(OBJS) $(DOC_DIR)
 	$(DVI2PDF) -o $(DOC_DIR)/$(TARGET) $(OBJ_DIR)/*.dvi
 
 clean:
 	-@$(RM) $(DOC_DIR)
 	-@$(RM) $(OBJ_DIR)
 
-run:
+open:
 	$(OPEN) $(DOC_DIR)/$(TARGET)
 
 $(OBJ_DIR)/%.tex.dvi: %.tex
