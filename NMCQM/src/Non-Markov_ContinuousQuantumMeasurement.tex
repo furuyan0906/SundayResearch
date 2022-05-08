@@ -16,6 +16,9 @@
 
 本書の構成に関して整理する。\ref{sec:21}節で本書で議論するモデルを明確にする。\ref{sec:22}節では\cite{diosi2008retarted}で主張されているNon-Markovな時間発展を明らかにする。\ref{sec:23}節では\cite{gambetta2002non-markov}で主張されているNon-Markovな量子測定を行った時の確率Schr\"{o}dinger方程式を明らかにする。\ref{sec:24}節では\cite{diosi2008retarted}に従い、\ref{sec:22}節と\ref{sec:23}節をベースとしたNon-Markovな量子連続測定について議論する。\ref{sec:30}章では本書全体のDiscussionを行う。\ref{sec:40}章では参考文献をまとめ、\ref{sec:50}章では\ref{sec:20}章では導出しなかった式の計算を明記する。
 
+なお、本書では、\textcolor{blue}{青字は独自の解釈に基づくが根拠に乏しい記述}であり、\textcolor{red}{赤字は計算を追えていない記述}を示す。
+
+
 \section{Non-Markov Continuous Quantum Measurement}
 \label{sec:20}
 
@@ -302,14 +305,97 @@ $\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S}$は規格化されていな�
 \end{equation}
 となる。ここで$p(x) = \Tr{S}{\left[ \phi_{0} \left( x - \op{x}{}(t_{\rm M} \right) \hrho{s}(0) \phi_{0}^{*} \left( x - \op{x}{}(t_{\rm M} \right) \right]}$。
 
-次に、始状態において測定器の相関が存在する場合を考える。すなわち、ガウス分布$G(x)$
+次に、始状態において測定器の相関が存在する場合を考える。すなわち、多変量Gauss分布$G(x)$
 \begin{equation}
 \begin{split}
 \label{eq:231}
 	 G(x) &= N \e{- 2 \integ{0}{t_{\rm M}} dt_{1} \integ{0}{t_{\rm M}} dt_{2} x(t_{1}) \alpha\left( t_{1} - t_{2} \right) x(t_{2})}
 \end{split}
 \end{equation}
-に対して、$\phi_{0}(x) = \sqrt{G(x)}$の場合を考える。このとき、$\hrho{S}(t)$は... \textcolor{red}{これ以降の計算はできていない}
+に対して、$\phi_{0}(x) = \sqrt{G(x)}$の場合を考える。\textcolor{blue}{\Eq{eq:231}より、無限次元の行列$\alpha\left( t_{1} - t_{2} \right)$の比対角成分が0でないため、異なる時刻の$x(t_{1})$と$x(t_{2})$が相関を持つことになる}。このとき、全系の始状態は
+\textcolor{red}{
+\begin{equation}
+\begin{split}
+\label{eq:232}
+	\hrho{0} \left[ x; x \right] &= \sqrt{G(x)} \hrho{S}(0) \sqrt{G(x)}
+\end{split}
+\end{equation}
+}
+である。\textcolor{blue}{ラベル$\left[ x, x' \right]$は、$x'$が時間発展前のインデックス、$x$が時間発展後のインデックスを表す}。時刻$t$だけ時間発展した時の状態$\hrho{t} \left[ x; x \right]$は
+\textcolor{red}{
+\begin{equation}
+\begin{split}
+\label{eq:233}
+	\hrho{t} \left[ x; x \right] &= \sop{T}{} \sqrt{G\left( x - \theta_{[0, t]} x_{t_{\rm M}, {\rm L}} \right)} \sqrt{G\left( x - \theta_{[0, t]} x_{t_{\rm M}, {\rm L}} \right)} \sop{K}{t_{\rm M}} \hrho{s}(0) \\
+		&= \sop{T}{} G\left( x - \theta_{[0, t]} x_{t_{\rm M}, {\rm c}} \right) \sop{K}{t_{\rm M}} \hrho{s}(0)
+\end{split}
+\end{equation}
+}
+となる。ここで$\theta_{[0, t]}$は$G(x)$の特性関数。\textcolor{blue}{\Eq{eq:233}はすなわち、始状態$\hrho{S}(0)$から測定の周期時間$t_{\rm}$だけNon-Markovな時間発展をした後、$t = t_{\rm M}$で瞬間的に測定を行った時、測定前の目盛りが$x(t_{\rm M})$で測定後の目盛りが$x(t_{\rm M})$である時のシステムの(条件付き)状態を表している}。また、\Eq{eq:233}を、取りうる全ての測定前の目盛りについて足し合わせると、測定によって$x(t_{\rm M})$を得たときのシステムの状態が得られる。
+\textcolor{red}{
+\begin{equation}
+\begin{split}
+\label{eq:234}
+	\hrho{t} \left[ x \right] &= \dfrac{1}{p(x)} \integ{}{} \prod_{t \notin \range{0}{t_{\rm M}}} dx(t) \hrho{t} \left[ x; x \right] \\
+		&= \dfrac{1}{p(x)} \sop{T}{} G_{\range{0}{t_{\rm M}}} \left[ x - x_{t_{\rm M}, c} \right] \sop{K}{t_{\rm M}} \hrho{S}(0)
+\end{split}
+\end{equation}
+}
+となる。ここで$G_{\range{0}{t_{\rm M}}}$は$G(x)$のFourier変換を全ての$x(t)$について掛け合わせた量である。
+
+\ref{sec:23}節において、\textcolor{blue}{ノイズ演算子は\Eq{eq:22}より(回転波近似を適用した場合の)測定器の測定量であると解釈ができる}。そのため、$z(t)$を測定器の目盛りに対応した量と捉え
+\textcolor{red}{
+\begin{equation}
+\begin{split}
+\label{eq:235}
+	z(t) = \integ{- \infty}{\infty} d\tau \alpha \left( t - \tau \right) x(\tau) = \alpha x
+\end{split}
+\end{equation}
+}
+を考える。この時、$\hrho{t} \left[ z; z \right]$
+\textcolor{red}{
+\begin{equation}
+\begin{split}
+\label{eq:236}
+	\hrho{t} \left[ z; z \right] &= \sop{T}{} \tilde{G} \left( z - 2 \alpha \theta_{\range{0}{t}} x_{t_{\rm M}, {\rm c}} \right) \sop{K}{t_{\rm M}} \hrho{s}(0)
+\end{split}
+\end{equation}
+}
+となり、$\hrho{t} \left[ z \right]$は
+\textcolor{red}{
+\begin{equation}
+\begin{split}
+\label{eq:237}
+	\hrho{t} \left[ z \right] &= \dfrac{1}{p(z)} \sop{T}{} \tilde{G} \left( z - 2 \alpha \theta_{\range{0}{t}} x_{t_{\rm M}, {\rm c}} \right) \sop{K}{t_{\rm M}} \hrho{s}(0)
+\end{split}
+\end{equation}
+}
+となる。ここで$\tilde{G}$は$G \div $ヤコビアンの量である。いま、
+\textcolor{red}{
+\begin{equation}
+\begin{split}
+\label{eq:238}
+	\hrho{t} \left[ z \right] &= \dfrac{1}{p(z)} \tilde{G}_{\range{0}{t_{\rm M}}}[z] \ket{\psi_{t}[z]}{S} \bra{\psi_{t}[z]}{S}
+\end{split}
+\end{equation}
+}
+となるような$\ket{\psi_{t}[z]}{S}$を探す。$\hrho{S}(0) = \ket{\psi_{0}}{S} \bra{\psi_{0}}{S}$とすると、\ref{sec:23}節の結果から、
+\textcolor{red}{
+\begin{equation}
+\begin{split}
+\label{eq:239}
+	\ket{\psi_{t}[z]}{S} &= \sop{T}{} \e{\left( \integ{0}{t} d\tau z_{\tau} \op{x}{}(\tau) - \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \op{x}{}(\tau_{1}) \alpha(\tau_{1} - \tau_{2}) \op{x}{}(\tau_{2}) \right)} \ket{\psi_{0}}{S}
+\end{split}
+\end{equation}
+}
+となる。\textcolor{red}{\Eq{eq:239}は\Eq{eq:228}の解である}。\textcolor{red}{したがって、\Eq{eq:228}は
+\begin{equation}
+\begin{split}
+\label{eq:240}
+	\op{z}{}(t) = \integ{- \infty}{\infty} d\tau \alpha \left( t - \tau \right) \op{x}{}(\tau)
+\end{split}
+\end{equation}
+を測定したときの条件付き状態ベクトルの運動方程式である}。
 
 \section{Discussion}
 \label{sec:30}
