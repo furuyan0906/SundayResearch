@@ -1,0 +1,100 @@
+\bibliographystyle{junsrt}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{comment}
+\usepackage{subcaption}
+\usepackage{dcolumn}
+\usepackage{longtable}
+\usepackage{here}
+\usepackage{mathcomp}
+\usepackage{colortbl}
+\usepackage{setspace}
+\usepackage[%                           % \UTF{0097}]\UTF{0094}\UTF{0092}\UTF{0082}\UTF{00CC}\UTF{0090}\UTF{00DD}\UTF{0092}\UTF{00E8}%
+%mag=1400,%                              jarticle \UTF{0082}\UTF{00CC}\UTF{008F}\UTF{00EA}\UTF{008D}\UTF{0087}\UTF{0081}i14pt\UTF{0082}\UTF{00C9}\UTF{0081}j
+dvipdfm,truedimen,%
+top=20truemm,bottom=20truemm,%
+left=15truemm,right=15truemm]{geometry}
+\renewcommand{\baselinestretch}{1.2}
+\makeatletter
+    \renewcommand{\theequation}{%
+    \thesection.\arabic{equation}}
+    \@addtoreset{equation}{section}
+  \makeatother
+
+\usepackage{amsthm}
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item\relax
+  {\bfseries
+  #1\@addpunct{.}}\hspace\labelsep\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+  
+
+\def\boltzman{k_{\rm B}}
+
+\def\Eq#1{Eq(\ref{#1})}
+\def\shift{\qquad \qquad}
+
+\def\e#1{e^{#1}}
+\def\exp#1{{\rm exp} \left[ #1 \right]}
+
+\def\Re#1{{\rm Re} \left[ #1 \right]}
+\def\Im#1{{\rm Im} \left[ #1 \right]}
+\def\Tr#1#2{{\rm Tr}_{\rm #1}#2}
+\def\inv#1{#1^{-1}}
+\def\integ#1#2{\int_{#1}^{#2}}
+\def\step#1#2{\theta \left( #1 - #2 \right)}
+\def\deltaf#1{\delta \left( #1 \right)}
+
+\def\dev#1#2{\dfrac{d#1}{d#2}}
+\def\pdev#1#2{\dfrac{\partial#1}{\partial#2}}
+\def\fdev#1#2{\dfrac{\delta#1}{\delta#2}}
+
+\def\set#1#2{\left\{ #1 \right\}_{#2}}
+\def\basis#1#2#3{\left\{ \ket{#1}{#2} \right\}_{#3}}
+\def\range#1#2{\left[ #1, #2 \right]}
+
+\def\I#1{\hat{I}_{\rm #1}}
+\def\H#1{\hat{H}_{\rm #1}}
+\def\V#1{\hat{V}_{\rm #1}}
+\def\U#1#2{\hat{U}_{\rm #1}(#2)}
+\def\invU#1#2{\hat{U}_{\rm #1}^{\dagger}(#2)}
+\def\Vec#1{{\footnotesize \mbox{\boldmath ${\rm #1}$}}}
+\def\abs#1{| #1 |}
+\def\ket#1#2{| #1 \rangle_{\rm #2}}
+\def\bra#1#2{{}_{\rm #2}\langle #1 |}
+\def\dket#1#2{| #1 \rangle \rangle_{\rm #2}}
+\def\dbra#1#2{{}_{\rm #2}\langle \langle #1 |}
+\def\hrho#1{\hat{\rho}_{\rm #1}}
+\def\inthrho#1{\hat{\rho}_{\rm #1, I}}
+
+\def\expect#1#2{\langle #1 \rangle_{\rm #2}}
+\def\ensemble#1{{\rm E} \left[ #1 \right]}
+\def\tildeensemble#1{{\rm \tilde{E}} \left[ #1 \right]}
+
+\def\qspace#1{\mathcal{#1}}
+
+
+\def\op#1#2{\hat{#1}_{#2}}
+\def\dop#1#2{\hat{#1}_{#2}^{\dagger}}
+\def\sop#1#2{\mathcal{#1}_{#2}}
+\def\norm#1{\left| #1 \right|}
+\def\hdot{\hat{\bullet}}
+
+\def\commute#1#2{\left[ #1, #2 \right]}
+\def\anticommute#1#2{\left{ #1, #2 \right}}
+
+\def\inner#1#2#3#4{{}_{\rm #2}\langle #1 | #3 \rangle_{\rm #4}}
+\def\dinner#1#2#3#4{{}_{\rm #2}\left\langle \left\langle #1 | #3 \right\rangle \right\rangle_{\rm #4}}
+
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\appendixname}{Appendix }
+

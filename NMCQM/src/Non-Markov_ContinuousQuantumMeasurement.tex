@@ -1,0 +1,491 @@
+\documentclass[10pt, a4paper]{jsarticle}
+
+\input{../common/preemble}
+
+\begin{document}
+
+
+\title{Non-Markov Continuous Quantum Measurement}
+\author{Furuya Taichi}
+\date{}
+\maketitle
+
+\section{Summary}
+\label{sec:10}
+本書は、\cite{diosi2008retarted}, \cite{diosi2008retarted}, \cite{gambetta2002non-markov}におけるNon-Markovな量子(連続)測定および確率Schr\"{o}dinger方程式に関する議論をまとめたものである。
+
+本書の構成に関して整理する。\ref{sec:21}節で本書で議論するモデルを明確にする。\ref{sec:22}節では\cite{diosi2008retarted}で主張されているNon-Markovな時間発展を明らかにする。\ref{sec:23}節では\cite{gambetta2002non-markov}で主張されているNon-Markovな量子測定を行った時の確率Schr\"{o}dinger方程式を明らかにする。\ref{sec:24}節では\cite{diosi2008retarted}に従い、\ref{sec:22}節と\ref{sec:23}節をベースとしたNon-Markovな量子連続測定について議論する。\ref{sec:30}章では本書全体のDiscussionを行う。\ref{sec:40}章では参考文献をまとめ、\ref{sec:50}章では\ref{sec:20}章では導出しなかった式の計算を明記する。
+
+\section{Non-Markov Continuous Quantum Measurement}
+\label{sec:20}
+
+\subsection{Setup}
+\label{sec:21}
+
+本書では、注目系であるシステムが測定器と結合している系を考え、測定器の物理量$\op{Q}{}$を測定する間接測定によるシステムの物理量$\op{x}{}$の連続測定を考える。
+
+いま、全系のハミルトニアン$\H{}$は次のように表される。
+\begin{equation}
+\begin{split}
+\label{eq:21}
+	\H{} &= \H{S} + \H{D} + \H{int}
+\end{split}
+\end{equation}
+$\H{S}$, $\H{D}$はそれぞれシステム、測定器のハミルトニアンである。また、$\H{int}$はシステムと測定器の相互作用ハミルトニアンで、次のように表される。
+\begin{equation}
+\begin{split}
+\label{eq:22}
+	\H{int} &= \op{x}{} \op{Q}{}
+\end{split}
+\end{equation}
+
+システムと測定器の始状態について、システムの始状態を$\hrho{S}(0)$、測定器の始状態を温度TのBosonの熱浴$\hrho{eq} = \e{- \beta \H{D}} / Z$とする。ここで、$Z = \Tr{D}{\e{- \beta \H{D}}}$は分配関数、$\inv{\beta} = \boltzman T$は逆温度である。この時の全系の始状態$\hrho{}(0)$は
+\begin{equation}
+\begin{split}
+\label{eq:23}
+	\hrho{}(0) &= \hrho{S}(0) \otimes \hrho{eq}
+\end{split}
+\end{equation}
+で表される。なお、$\hrho{eq}$について以下を要請する。
+\begin{equation}
+\begin{split}
+\label{eq:24}
+	\Tr{D}{\commute{\hrho{eq}}{\op{Q}{}}} &= 0
+\end{split}
+\end{equation}
+
+本書では、システムと測定器が上記のように結合する系での量子連続測定を考える。なお、以降では全て相互作用表示を採用し、接頭語${\rm I}$で区別する。
+
+\subsection{Superoperator formalism of system's density matrix}
+\label{sec:22}
+
+ここでは、システムの状態のダイナミクスを超演算子形式で表現することを考える。本節の議論は\cite{diosi1993master}に基づく。
+
+一般に、システムの始状態$\hrho{S}(0)$から時刻$t$だけ時間発展した状態$\hrho{I,S}(t)$は、次のように表される。
+\begin{equation}
+\begin{split}
+\label{eq:25}
+	\hrho{I,S}(t) &= \sop{K}{t} \hrho{S}(0)
+\end{split}
+\end{equation}
+ここで$\sop{K}{t}$はシステムの状態の時間発展を表す超演算子で、時刻$t'$から時刻$t$までの全系の時間発展を表す時間発展演算子$\U{}{t, t'}$を用いて
+\begin{equation}
+\begin{split}
+\label{eq:26}
+	\sop{K}{t} \hdot &= \Tr{D}{\U{}{t, t'} \hdot \invU{}{t, t'}}
+\end{split}
+\end{equation}
+と表される。
+
+いま、本書のセットアップにおいて、時刻$0$から時刻$t$までの時間発展を考える。$t$の2次の項までを展開し測定器について部分トレースを取ると、$\sop{K}{t}$は次のように表される。
+\begin{equation}
+\begin{split}
+\label{eq:27}
+	\sop{K}{t} &= \sop{T}{} {\rm exp} \left[ - \dfrac{i}{\hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  \left(x_{\tau_{2}, {\rm L}} - x_{\tau_{2}, {\rm R}}\right) \alpha_{\rm I} \left(\tau_{1} - \tau_{2} \right) \left(x_{\tau_{2}, {\rm L}} + x_{\tau_{2}, {\rm R}}\right) \right. \\
+		&\qquad \left. - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  \left(x_{\tau_{2}, {\rm L}} - x_{\tau_{2}, {\rm R}}\right) \alpha_{\rm R} \left(\tau_{1} - \tau_{2} \right) \left(x_{\tau_{2}, {\rm L}} - x_{\tau_{2}, {\rm R}}\right) \right] \\
+		&= \sop{T}{} \exp{- \dfrac{i}{\hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  x_{\tau_{1}, \Delta} \alpha_{\rm I} \left(\tau_{1} - \tau_{2} \right) x_{\tau_{2}, {\rm c}} - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  x_{\tau_{1}, \Delta} \alpha_{\rm R} \left(\tau_{1} - \tau_{2} \right) x_{\tau_{2}, \Delta}}
+\end{split}
+\end{equation}
+ここで、自己相関関数$\alpha(t)$
+\begin{equation}
+\begin{split}
+\label{eq:28}
+	\alpha(t) = \dfrac{1}{\hbar} \expect{\op{Q}{}(t) \op{Q}{}(0)}{T}
+\end{split}
+\end{equation}
+を導入しており、$\alpha_{\rm R}(t) = \Re{\alpha(t)}$, $\alpha_{\rm I}(t) = \Im{\alpha(t)}$である。ここで、$\expect{\bullet}{T} = \Tr{D}{\hrho{eq} \bullet}$。また、$\hat{D}(t) = \e{i \H{D} t / \hbar} \op{Q}{} \e{- i \H{D} t / \hbar}$, $\op{Q}{}(0) = \op{Q}{}$。また、$x_{t, {\rm L}}$, $x_{t, {\rm R}}$は超演算子で
+\begin{equation}
+\begin{split}
+\label{eq:29}
+	x_{t, {\rm L}} \hdot &= \op{x}{}(t) \hdot \\
+	x_{t, {\rm R}} \hdot &= \hdot \op{x}{}(t)
+\end{split}
+\end{equation}
+と定義されており、$x_{t, \Delta}$, $x_{t, {\rm c}}$はそれぞれ
+\begin{equation}
+\begin{split}
+\label{eq:210}
+	x_{t, \Delta} &= x_{t, {\rm L}} - x_{t, {\rm R}} \\
+	x_{t, {\rm c}} &= \dfrac{1}{2} \left( x_{t, {\rm L}} + x_{t, {\rm R}} \right) \\
+\end{split}
+\end{equation}
+と表される。また、$\sop{T}{}$は時間順序積である。
+
+以上より、\Eq{eq:27}を用いてシステムの密度行列の時間発展は
+\begin{equation}
+\begin{split}
+\label{eq:211}
+	\hrho{I,S}(t) &= \sop{T}{} \exp{- \dfrac{1}{\hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  x_{\tau_{1}, \Delta} \alpha_{\rm I} \left(\tau_{1} - \tau_{2} \right) x_{\tau_{2}, {\rm c}} - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  x_{\tau_{1}, \Delta} \alpha_{\rm R} \left(\tau_{1} - \tau_{2} \right) x_{\tau_{2}, \Delta}} \hrho{S}(0)
+\end{split}
+\end{equation}
+となる。
+
+
+\subsection{Stochastic Sch\"{o}dinger equation for non-Markov continuous quantum measurement}
+\label{sec:23}
+
+ここでは、Non-Markovな測定を行った時の確率Sch\"{o}dinger方程式を議論する。本節の議論は\cite{gambetta2002non-markov}に基づく。
+
+測定演算子として、$\op{M}{\set{q_{k}}{}} = \ket{\set{n_{k}}{}}{D} \bra{\set{q_{k}}{}}{D}$を考える。ここで$\ket{\set{q_{k}}{}}{D}$は$\op{Q}{}$のモード$k$の基底で$\op{Q}{} \ket{\set{q_{k}}{}}{D} = q_{k} \ket{\set{q_{k}}{}}{D}$を満たす。また、$\ket{\set{n_{k}}{}}{D}$は測定器の基底であり、$\basis{q_{k}}{D}{}$で測定を行った後の測定器の状態が$\ket{\set{n_{k}}{}}{D}$となることから、後に導入する測定のノイズ演算子の固有状態と考えられる。なお、$\op{F}{\set{q_{k}}{}} = \op{M}{\set{q_{k}}{}}^{\dagger} \op{M}{\set{q_{k}}{}} = \bra{\set{q_{k}}{}}{D} \ket{\set{q_{k}}{}}{D}$はPOVMとなる。
+
+測定前の全系の状態が$\ket{\Psi_{\rm I}(t)}{}$である場合、測定後の状態$\ket{\Psi_{{\rm I}, \set{q_{k}}{}}^{'}(t)}{}$は
+\begin{equation}
+\begin{split}
+\label{eq:212}
+	\ket{\Psi_{{\rm I}, \set{q_{k}}{}}^{'}(t)}{} &= \dfrac{\op{M}{\set{q_{k}}{}} \ket{\Psi_{\rm I}(t)}{}}{\sqrt{p(\set{q_{k}}{}, t)}} = \dfrac{\inner{\set{q}{}}{D}{\Psi_{\rm I}(t)}{} \otimes \ket{\set{q_{k}}{}}{D}}{\sqrt{p(\set{q_{k}}{}, t)}} \\
+	p(\set{q_{k}}{}, t) &= \norm{\op{M}{\set{q_{k}}{}} \ket{\Psi_{\rm I}(t)}{}}^{2} = \bra{\Psi_{\rm I}(t)}{} \op{F}{\set{q_{k}}{}} \ket{\Psi_{\rm I}(t)}{}
+\end{split}
+\end{equation}
+となる。そのため、測定後のシステムの状態$\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S}$は
+\begin{equation}
+\begin{split}
+\label{eq:213}
+	\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S} &= \dfrac{\inner{\set{q}{}}{D}{\Psi_{\rm I}(t)}{}}{\sqrt{p(\set{q_{k}}{}, t)}} \\
+\end{split}
+\end{equation}
+である。また、システムの密度行列$\hrho{s}(t)$は
+\begin{equation}
+\begin{split}
+\label{eq:214}
+	\hrho{s}(t) &= \Tr{}{\ket{\Psi_{\rm I}(t)}{} \bra{\Psi_{\rm I}(t)}{}} = \int{}{} d\set{q_{k}}{} \inner{\set{q}{}}{D}{\Psi_{\rm I}(t)}{} \inner{\Psi_{\rm I}(t)}{}{\set{q}{}}{D} \\
+		&= \int{}{} d\set{q_{k}}{} p(\set{q_{k}}{}, t) \ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S} \bra{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S} \\
+		&= \ensemble{\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S} \bra{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S}}
+\end{split}
+\end{equation}
+と測定後のシステムの状態のアンサンブル平均によって記述される。
+
+\Eq{eq:213}は$p(\set{q_{k}}{}, t)$が$\ket{\Psi_{\rm I}(t)}{}$に依存していることから、測定前の状態について非線型な方程式である。これを$\ket{\Psi_{\rm I}(t)}{}$に対して線型な方程式に近似するため、擬確率(ostensibleな確率)$\Lambda (\set{q_{k}}{})$を導入し、
+\begin{equation}
+\begin{split}
+\label{eq:215}
+	\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S} &= \dfrac{\inner{\set{q}{}}{D}{\Psi_{\rm I}(t)}{}}{\sqrt{\Lambda (\set{q_{k}}{})}} \\
+\end{split}
+\end{equation}
+を考える。$\Lambda (\set{q_{k}}{})$は$\ket{\Psi_{\rm I}(t)}{}$に依存しないように導入したことから、時間に依存しない。\Eq{eq:215}を用いると
+\begin{equation}
+\begin{split}
+\label{eq:216}
+	\hrho{s}(t) &= \Tr{}{\ket{\Psi_{\rm I}(t)}{} \bra{\Psi_{\rm I}(t)}{}} = \int{}{} d\set{q_{k}}{} \inner{\set{q}{}}{D}{\Psi_{\rm I}(t)}{} \inner{\Psi_{\rm I}(t)}{}{\set{q}{}}{D} \\&= \int{}{} d\set{q_{k}}{} \Lambda (\set{q_{k}}{}) \ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S} \bra{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S} \\
+		&= \tildeensemble{\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S} \bra{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S}}
+\end{split}
+\end{equation}
+を得る。ここで$\tildeensemble{}$は擬確率$\Lambda (\set{q_{k}}{})$によるアンサンブル平均を表す。
+
+
+$\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S}$は規格化されていないことに注意されたい。そのため、本当の測定後のシステムの状態$\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S}$を
+\begin{equation}
+\begin{split}
+\label{eq:217}
+	\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S} &= \dfrac{\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S}}{\norm{\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S}}}
+\end{split}
+\end{equation}
+と定義する。このとき、$\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S}$の時間発展方程式は連鎖律より
+\begin{equation}
+\begin{split}
+\label{eq:218}
+	\dev{}{t}\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S} &= \dfrac{1}{\norm{\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S}}} \left( \pdev{}{t}\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S} + \sum_{k} \dev{q_{k}}{t} \pdev{}{q_{k}}\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S} \right) + \dev{}{t} \left( \dfrac{1}{\norm{\ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S}}} \right) \ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S}
+\end{split}
+\end{equation}
+となる。実用上は、$\ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S}$の時間発展を求めて規格化することで$\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S}$を得るのが有用である。
+
+いま、測定器の始状態がcoherent状態$\ket{\set{a_{k}}{}}{D} = \prod_{k} \frac{1}{\sqrt{pi}} \e{- \abs{a_{k}}^{2}/2} \sum_{n_{k}} \frac{a_{k}^{n_{k}}}{\sqrt{n_{k}!}} \ket{n_{k}}{D}$であるとする。ここで$\ket{n_{k}}{D}$はモードkの粒子数状態で$\op{n}{k} = \dop{a}{k} \op{a}{k}$に対して$\op{n}{k} \ket{n_{k}}{D} = n_{k} \ket{n_{k}}{D}$を満たす。また、測定の基底を$\ket{\set{a_{k}}{}}{D}$とする。加えて、システムと測定器の相互作用が
+\begin{equation}
+\begin{split}
+\label{eq:219}
+	\op{H}{int} &= i \sum_{k} g_{k} \left( \op{x}{} \dop{a}{k} - \dop{x}{} \op{a}{k} \right)
+\end{split}
+\end{equation}
+であるとし、$\op{x}{}$と$\op{a}{k}$の相互作用表示のおける表現$\op{x}{}(t)$、$\op{a}{k}(t)$がそれぞれ
+\begin{equation}
+\begin{split}
+\label{eq:220}
+	\op{x}{}(t) &= \op{x}{} \e{-i \omega_{0} t / \hbar} \\
+	\op{a}{k}(t) &= \op{a}{} \e{-i \omega_{k} t / \hbar}
+\end{split}
+\end{equation}
+であるとすろ。ここで$\omega_{0}$はシステムの角振動数、$\omega_{k}$は測定器のモードkの角振動数。\Eq{eq:220}は\Eq{eq:22}において位置演算子$\op{x}{}$と共役な運動量演算子$\op{p}{}$の結合を考え、回転波近似を適用した場合に対応する。
+
+いま、coherentなノイズ演算子$\op{z}{}(t) = \sum_{k} g_{k} \op{a}{k} \e{-i \left( \omega_{k} - \omega_{0} \right) t / hbar}$を導入すると、
+\begin{equation}
+\begin{split}
+\label{eq:221}
+	\op{z}{}(t) \ket{\set{a_{k}}{}}{D} &= \sum_{k} g_{k} a_{k} \e{-i \left( \omega_{k} - \omega_{0} \right) t / \hbar} \ket{\set{a_{k}}{}}{D} \\
+		&= z(t) \ket{\set{a_{k}}{}}{D}
+\end{split}
+\end{equation}
+であるため、coherent状態が固有値$z(t)$の固有状態となる。これは測定器が$\omega_{k} = \omega_{0}$の共鳴条件が満たされるモードで最も強度が高くなる。擬確率$\Lambda \left( \set{a}{k} \right)$として
+\begin{equation}
+\begin{split}
+\label{eq:222}
+	\Lambda \left( \set{a}{k} \right) &= \norm{\inner{0}{D}{\set{n_{k}}{}}{D}}^{2} = \pi^{- \sum_{k}} \e{- \sum_{k} \abs{a_{k}}^{2}}
+\end{split}
+\end{equation}
+を選ぶと、\Eq{eq:218}における$\partial_{t} \ket{\tilde{\psi}_{{\rm I}, \set{q_{k}}{}}(t)}{S}$以下のようになるは以下のようになる。
+\begin{equation}
+\begin{split}
+\label{eq:223}
+	\dev{}{t}\ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S} &= z^{*}(t) \op{x}{} \ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S} - \dfrac{\bra{\set{a_{k}}{}}{} \op{z}{}(t) \dop{x}{} \ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S}}{\sqrt{\Lambda \left( \set{a_{}}{} \right)}} \\
+		&= \left( z^{*}(t) \op{x}{} - \dop{x}{} \sum_{k} g_{k} \e{-i \left( \omega_{k} - \omega_{0} \right) t / \hbar} \pdev{}{a_{k}} \right) \ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S}
+\end{split}
+\end{equation}
+また、\Eq{eq:28}を具体的に計算すると
+\begin{equation}
+\begin{split}
+\label{eq:224}
+	\alpha \left( t \right) &= \sum_{k} \abs{g_{k}}^{2} \e{-i \left( \omega_{k} - \omega_{0} \right) t}
+\end{split}
+\end{equation}
+となる。
+
+さらに、$\partial_{a_{k}^{*}}$の連鎖律を考えると
+\begin{equation}
+\begin{split}
+\label{eq:225}
+	\pdev{}{a_{k}^{*}} &= \integ{0}{t} d\tau \pdev{z^{*}(\tau)}{a_{k}^{*}} \fdev{}{z^{*}(\tau)} \\
+		&= \integ{0}{t} d\tau g_{k}^{*} \e{i \left( \omega_{k} - \omega_{0} \right) \tau} \fdev{}{z^{*}(\tau)}
+\end{split}
+\end{equation}
+より、\Eq{eq:223}は
+\begin{equation}
+\begin{split}
+\label{eq:226}
+	\dev{}{t}\ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S} &= \left( z^{*}(t) \op{x}{} - \dop{x}{} \integ{0}{t} d\tau \alpha \left( t - \tau \right) \fdev{}{z^{*}(\tau)} \right) \ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S}
+\end{split}
+\end{equation}
+となる。\Eq{eq:223}において$\ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S}$を得て規格化することで、$\ket{\psi_{{\rm I}, \set{q_{k}}{}}(t)}{S}$を得ることができる。
+
+\Eq{eq:226}の第ニ項が時間について畳み込み積分の形をしているため、\Eq{eq:226}はNon-Markovな確率Sch\"{o}dinger方程式となる。また、\Eq{eq:226}の興味深いこととして、測定器における粒子数の増減(言い換えれば、システムにおける粒子数の減増)のプロセスの違いで、ノイズの発生方法がことが挙げられる。測定器の粒子数が増加するプロセスに比べて、粒子数が減少するプロセスではcoherent状態の各モードのパラメータ$a_{k}^{*}$の増加率(微分係数)の分だけノイズの強度が強化される。
+
+
+\subsection{Non-Markov continuous quantum measurement of retarted observables}
+\label{sec:24}
+
+本節では、Non-Markovな連続測定によって測定される物理量についての議論を行う。本議論は\cite{diosi2008retarted}に基づく。
+
+これまでの議論を整理すると、\Eq{eq:27}ではシステムのNon-Markovな時間発展超演算子を明らかにし、\Eq{eq:226}では量子測定を行った時のNon-Markovな確率Schr\"{o}dinger方程式を明らかにした。その上で、本節ではNon-Markovな連続測定について議論する。
+
+本節では、簡単のため自己相関関数$\alpha \left( t \right)$の実部のみを考え、虚部を無視する。すなわち、\Eq{eq:27}および\Eq{eq:226}は
+\begin{equation}
+\begin{split}
+\label{eq:227}
+	\sop{K}{t} &= \sop{T}{} \exp{- \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  x_{\tau_{1}, \Delta} \alpha \left(\tau_{1} - \tau_{2} \right) x_{\tau_{2}, \Delta}}
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+\label{eq:228}
+	\dev{}{t}\ket{\tilde{\psi}_{{\rm I}, z}(t)}{S} &= \left( z(t) \op{x}{} - \dop{x}{} \integ{0}{t} d\tau \alpha \left( t - \tau \right) \fdev{}{z(\tau)} \right) \ket{\tilde{\psi}_{{\rm I}, z}(t)}{S}
+\end{split}
+\end{equation}
+となる。ここで、自己相関関数$\alpha \left( t \right)$の実部を改めて$\alpha \left( t \right)$と書き、$\ket{\tilde{\psi}_{{\rm I}, z}(t)}{S}$のラベルを$\set{a_{k}}{}$から$z$に変更した。
+
+本節では、von Neumannのポインター基底測定\cite{hotta2014quantum}を考える。すなわち、\ref{eq:22}において$\op{Q}{}$は測定器のメーターの目盛りの位置(ポインター基底)に共役な運動量演算子である。また、本節では測定の周期時間$t_{\rm M}$を考え、1度の測定における時刻$t$は$t \in \range{0}{t_{\rm M}}$を満たすとする。測定器の状態は常にポインター基底で考える、すなわち測定器の始状態$D_{0}(x)$は対応する状態ベクトル$\ket{\phi_{0}}{D}$を用いて
+\begin{equation}
+\begin{split}
+\label{eq:229}
+	D_{0}(x) &= \inner{x}{D}{\phi_{0}}{D} \inner{\phi_{0}}{D}{x}{D}
+\end{split}
+\end{equation}
+となり、測定器の状態はベクトルや行列ではなく関数で表される。なお、以降ではシステムの始状態として$\hrho{S}(0)$を考えるため、測定器の始状態についても波動関数ではなく、密度行列のポインター基底表現を考えた。
+
+さて、$t_{\rm M}$が測定器の時間スケールに比べて十分短いケースを考え、$\H{D}$を無視する。また、$t = t_{\rm M}$のピンポイントで測定を行い結果を取得する場合を考え、相互作用表示において$\H{int}(t) = \deltaf{t - t_{\rm M}} \op{x}{}(t) \otimes \op{p}{}$による時間発展を考える。このとき、$t = t_{\rm M}$では$D_{0}(x)$が$\op{x}{}(t_{\rm M})$だけシフトするが、$t \neq t_{\rm M}$では$\U{I}(t) = \I{}$である。したがって、測定の結果$x$を得たとすると
+\begin{equation}
+\begin{split}
+\label{eq:230}
+	\hrho{S}(t) &= \left\{
+		\begin{array}{ll}
+			\hrho{S}(0) D_{0}(x) & (t \neq t_{\rm M}) \\
+			\dfrac{1}{p(x)} \phi_{0} \left( x - \op{x}{}(t_{\rm M} \right) \hrho{s}(0) \phi_{0}^{*} \left( x - \op{x}{}(t_{\rm M} \right) & (t = t_{\rm M})
+		\end{array}
+		\right.
+\end{split}
+\end{equation}
+となる。ここで$p(x) = \Tr{S}{\left[ \phi_{0} \left( x - \op{x}{}(t_{\rm M} \right) \hrho{s}(0) \phi_{0}^{*} \left( x - \op{x}{}(t_{\rm M} \right) \right]}$。
+
+次に、始状態において測定器の相関が存在する場合を考える。すなわち、ガウス分布$G(x)$
+\begin{equation}
+\begin{split}
+\label{eq:231}
+	 G(x) &= N \e{- 2 \integ{0}{t_{\rm M}} dt_{1} \integ{0}{t_{\rm M}} dt_{2} x(t_{1}) \alpha\left( t_{1} - t_{2} \right) x(t_{2})}
+\end{split}
+\end{equation}
+に対して、$\phi_{0}(x) = \sqrt{G(x)}$の場合を考える。このとき、$\hrho{S}(t)$は... \textcolor{red}{これ以降の計算はできていない}
+
+\section{Discussion}
+\label{sec:30}
+
+\cite{diosi2008retarted}, \cite{diosi1993master}, \cite{gambetta2002non-markov}で展開された議論の前提として、測定器はBoson系であり、始状態は熱平衡状態であった。そのため、リードを使って固体中の電子スピンの状態を測定するようなケースには対応していない。
+
+また、系全体の始状態について、システムと測定器の相関はないことが前提となっており、十分速い測定を繰り返し行うことで始状態においてシステムと測定器の相関がまだ残っている(decoherenceしていない)ケースは考慮されていない。始状態におけるシステムと測定器の相関が与える影響は明らかにされていない。
+
+さらに、フォーマリズムの観点から、連続測定を行った時の測定演算子による状態のダイナミクスは明らかにされていない。
+
+\section{Reference}
+\label{sec:40}
+
+\begingroup
+\renewcommand{\section}[2]{}
+\begin{thebibliography}{0}
+\setlength{\parskip}{0mm}
+\setlength{\itemsep}{-0.3mm}
+\small
+	\bibitem{diosi2008retarted}L. Di\'{o}si, Phys. Rev. Lett. \textbf{100}, 080401 (2008).
+	\bibitem{diosi1993master}L. Di\'{o}si, Physica (Amsterdam) \textbf{199A}, 517 (1993).
+	\bibitem{gambetta2002non-markov}J. Gambetta and H. W. Wiseman, Phys. Rev. A \textbf{66}, 012108 (2002).
+	\bibitem{hotta2014quantum}堀田 昌寛, 「量子情報と時空の物理」 (2014).
+\end{thebibliography}
+\endgroup
+
+
+\section{Appendix}
+\label{sec:50}
+
+\subsection{Derivation of \Eq{eq:27}}
+\label{sec:51}
+
+いま、\Eq{eq:22}より相互作用表示における全系のハミルトニアン$\H{\rm I}$は
+\begin{equation}
+\begin{split}
+\label{eq:501}
+	\H{\rm I} = \op{x}{}(t) \op{Q}{}(t)
+\end{split}
+\end{equation}
+である。ただし、$\op{x}{}(t) = \e{i \H{S} t / \hbar} \op{x}{} \e{- i \H{S} t / \hbar}$, $\hat{D}(t) = \e{i \H{D} t / \hbar} \op{Q}{} \e{- i \H{D} t / \hbar}$である。このとき、時間発展演算子$\U{\rm I}{t}$は
+\begin{equation}
+\begin{split}
+\label{eq:502}
+	\U{\rm I} = \sop{T}{} \e{- i \integ{0}{t} d\tau \H{\rm I}(\tau) / \hbar}
+\end{split}
+\end{equation}
+である。これより、$\hrho{I,S}(t)$は
+\begin{equation}
+\begin{split}
+\label{eq:503}
+	\hrho{I,S}(t) &= \sop{K}{t} \hrho{S}(0) \\
+		&= \Tr{D}{\sop{T}{} \e{- i \integ{0}{t} d\tau \H{\rm I}(\tau) / \hbar} \hrho{S}(0) \otimes \hrho{eq} \sop{T}{} \e{i \integ{0}{t} d\tau \H{\rm I}(\tau) / \hbar}} \\
+		&= \Tr{D}{} \left\{ \I{} - \dfrac{i}{\hbar} \integ{0}{t} d\tau \H{\rm I}(\tau) - \dfrac{1}{2 \hbar^{2}} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \left[ \H{\rm I}(\tau_{1}) \H{\rm I}(\tau_{2}) \right] + \cdots \right\} \hrho{S}(0) \otimes \hrho{eq} \\
+		&\shift \left\{ \I{} + \dfrac{i}{\hbar} \integ{0}{t} d\tau \H{\rm I}(\tau) - \dfrac{1}{2 \hbar^{2}} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \left[ \H{\rm I}(\tau_{1}) \H{\rm I}(\tau_{2}) \right] + \cdots \right\} \\
+		&\simeq \hrho{S}(0) - \dfrac{i}{\hbar} \integ{0}{t} d\tau \Tr{D}{\commute{\H{\rm I}(\tau)}{\hrho{S}(0) \otimes \hrho{eq}}} \\
+		&\shift - \dfrac{1}{2 \hbar^{2}} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \Tr{D}{ \left( \sop{T}{} \left[ \H{\rm I}(\tau_{1})\H{\rm I}(\tau_{2}) \right] \hrho{S}(0) \otimes \hrho{eq} + \hrho{S}(0) \otimes \hrho{eq} \sop{T}{} \left[ \H{\rm I}(\tau_{1})\H{\rm I}(\tau_{2}) \right] \right. \\
+		&\shift \shift \left. - 2 \H{\rm I}(\tau_{1}) \hrho{S}(0) \otimes \hrho{eq} \H{\rm I}(\tau_{2}) } \right)
+\end{split}
+\end{equation}
+となる。\Eq{eq:22}より第ニ項は$0$となり、第三項については
+\begin{equation}
+\begin{split}
+\label{eq:504}
+	\sop{T}{} \left[ \H{\rm I}(\tau_{1})\H{\rm I}(\tau_{2}) \right] &= \step{\tau_{1}}{\tau_{2}} \H{\rm I}(\tau_{1})\H{\rm I}(\tau_{2}) + \step{\tau_{2}}{\tau_{1}} \H{\rm I}(\tau_{2})\H{\rm I}(\tau_{1})
+\end{split}
+\end{equation}
+と自己相関関数\Eq{eq:28}に関する性質
+\begin{equation}
+\begin{split}
+\label{eq:505}
+	\dfrac{1}{\hbar}\expect{\op{Q}{}(\tau_{1}) \op{Q}{}(\tau_{2})}{T} &= \dfrac{1}{\hbar}\expect{\op{Q}{}(\tau_{1} - \tau_{2}) \op{Q}{}(0)}{T} \\
+		&= \alpha(\tau_{1} - \tau_{2})
+\end{split}
+\end{equation}
+より、
+\begin{equation}
+\begin{split}
+\label{eq:506}
+	\hrho{I,S}(t) &= \sop{K}{t} \hrho{S}(0) \\
+		&= \Tr{D}{\sop{T}{} \e{- i \integ{0}{t} d\tau \H{\rm I}(\tau) / \hbar} \hrho{S}(0) \otimes \hrho{eq} \sop{T}{} \e{i \integ{0}{t} d\tau \H{\rm I}(\tau) / \hbar}} \\
+		&= \Tr{D}{} \left\{ \I{} - \dfrac{i}{\hbar} \integ{0}{t} d\tau \H{\rm I}(\tau) - \dfrac{1}{2 \hbar^{2}} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \left[ \H{\rm I}(\tau_{1}) \H{\rm I}(\tau_{2}) \right] + \cdots \right\} \hrho{S}(0) \otimes \hrho{eq} \\
+		&\shift \left\{ \I{} + \dfrac{i}{\hbar} \integ{0}{t} d\tau \H{\rm I}(\tau) - \dfrac{1}{2 \hbar^{2}} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \left[ \H{\rm I}(\tau_{1}) \H{\rm I}(\tau_{2}) \right] + \cdots \right\} \\
+		&\simeq \hrho{S}(0) - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \left\{ - \alpha(\tau_{1} - \tau_{2}) \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) - \alpha(\tau_{2} - \tau_{1}) \op{x}{}(\tau_{1}) \hrho{S}(0) \op{x}{}(\tau_{2}) \right. \\
+		&\shift \left. \step{\tau_{1}}{\tau_{2}}\alpha(\tau_{1} - \tau_{2}) \left[ \op{x}{}(\tau_{1}) \op{x}{}(\tau_{2}) \hrho{S}(0) + \hrho{S}(0) \op{x}{}(\tau_{1}) \op{x}{}(\tau_{2}) \right] \right. \\
+		&\shift \left. + \step{\tau_{2}}{\tau_{1}}\alpha(\tau_{2} - \tau_{1}) \left[ \op{x}{}(\tau_{2}) \op{x}{}(\tau_{1}) \hrho{S}(0) + \hrho{S}(0) \op{x}{}(\tau_{2}) \op{x}{}(\tau_{1}) \right]\right\}
+\end{split}
+\end{equation}
+となる。ここで、積分変数に関する対称性
+\begin{equation}
+\begin{split}
+\label{eq:507}
+		\integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} 2 \alpha(\tau_{1} - \tau_{2}) \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) = \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \left[ \alpha(\tau_{1} - \tau_{2}) \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) + \alpha(\tau_{2} - \tau_{1}) \op{x}{}(\tau_{1}) \hrho{S}(0) \op{x}{}(\tau_{2}) \right]
+\end{split}
+\end{equation}
+を用いた。いま、自己相関関数$\alpha(t)$を実部と虚部に分けて$\alpha(t) = \alpha_{\rm R}(t) + i \alpha_{\rm I}(t)$とすると
+\begin{equation}
+\begin{split}
+\label{eq:508}
+		\alpha(-t) &= \expect{\op{Q}{}(-t) \op{Q}{}(0)}{T} = \Tr{D}{\hrho{eq} \e{- i \H{D} t \hbar} \op{Q}{} \e{i \H{D} t \hbar} \op{Q}{}} \\
+			&= \left[ \Tr{D}{\hrho{eq} \e{i \H{D} t \hbar} \op{Q}{} \e{- i \H{D} t \hbar} \op{Q}{}} \right]^{*} \\
+			&= \alpha^{*}(t)
+\end{split}
+\end{equation}
+から$\alpha_{\rm R}(-t) = \alpha_{\rm R}(t)$, $\alpha_{\rm I}(-t) = - \alpha_{\rm I}(t)$であることと、積分内で成り立つ関係
+\begin{equation}
+\begin{split}
+\label{eq:509}
+	1 = \step{\tau_{1}}{\tau_{2}} + \step{\tau_{2}}{\tau_{1}}
+\end{split}
+\end{equation}
+より、
+\begin{equation}
+\begin{split}
+\label{eq:510}
+	\hrho{I,S}(t) &= \hrho{S}(0) \\
+		&\quad - \dfrac{i}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \step{\tau_{1}}{\tau_{2}} \alpha_{\rm I}(\tau_{1} - \tau_{2}) \left( \op{x}{}(\tau_{1}) \hrho{S}(0) \op{x}{}(\tau_{2}) - \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) + \op{x}{}(\tau_{1}) \op{x}{}(\tau_{2}) \hrho{S}(0) - \hrho{S}(0) \op{x}{}(\tau_{2}) \op{x}{}(\tau_{1}) \right) \\
+		&\quad - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \step{\tau_{1}}{\tau_{2}} \alpha_{\rm R}(\tau_{1} - \tau_{2}) \left( - \op{x}{}(\tau_{1}) \hrho{S}(0) \op{x}{}(\tau_{2}) - \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) + \op{x}{}(\tau_{1}) \op{x}{}(\tau_{2}) \hrho{S}(0) + \hrho{S}(0) \op{x}{}(\tau_{2}) \op{x}{}(\tau_{1}) \right) \\
+		&\quad - \dfrac{i}{2 \hbar} \integ{0}{t} d\tau_{2} \integ{0}{t} d\tau_{1} \step{\tau_{2}}{\tau_{1}} \alpha_{\rm I}(\tau_{2} - \tau_{1}) \left( \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) - \op{x}{}(\tau_{1}) \hrho{S}(0) \op{x}{}(\tau_{2}) + \op{x}{}(\tau_{2}) \op{x}{}(\tau_{1}) \hrho{S}(0) - \hrho{S}(0) \op{x}{}(\tau_{1}) \op{x}{}(\tau_{2}) \right) \\
+		&\quad - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \step{\tau_{2}}{\tau_{1}} \alpha_{\rm R}(\tau_{2} - \tau_{1}) \left( - \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) - \op{x}{}(\tau_{1}) \hrho{S}(0) \op{x}{}(\tau_{2}) + \op{x}{}(\tau_{2}) \op{x}{}(\tau_{1}) \hrho{S}(0) + \hrho{S}(0) \op{x}{}(\tau_{1}) \op{x}{}(\tau_{2}) \right) \\
+		&=  \hrho{S}(0) \\
+		&\quad - \dfrac{i}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \alpha_{\rm I}(\tau_{1} - \tau_{2}) \left( \op{x}{}(\tau_{1}) \hrho{S}(0) \op{x}{}(\tau_{2}) - \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) + \op{x}{}(\tau_{1}) \op{x}{}(\tau_{2}) \hrho{S}(0) - \hrho{S}(0) \op{x}{}(\tau_{2}) \op{x}{}(\tau_{1}) \right) \\
+		&\quad - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \alpha_{\rm R}(\tau_{1} - \tau_{2}) \left( - \op{x}{}(\tau_{1}) \hrho{S}(0) \op{x}{}(\tau_{2}) - \op{x}{}(\tau_{2}) \hrho{S}(0) \op{x}{}(\tau_{1}) + \op{x}{}(\tau_{1}) \op{x}{}(\tau_{2}) \hrho{S}(0) + \hrho{S}(0) \op{x}{}(\tau_{2}) \op{x}{}(\tau_{1}) \right)
+\end{split}
+\end{equation}
+となる。よって、\Eq{eq:29}と\Eq{eq:210}で定義した超演算子を使用すると
+\begin{equation}
+\begin{split}
+\label{eq:511}
+	\hrho{I,S}(t) &= \hrho{S}(0) - \dfrac{i}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \alpha_{\rm I}(\tau_{1} - \tau_{2}) \left( x_{\tau_{1}, {\rm L}} x_{\tau_{2}, {\rm R}} - x_{\tau_{1}, {\rm R}} x_{\tau_{2}, {\rm L}} + x_{\tau_{1}, {\rm L}} x_{\tau_{2}, {\rm L}} - x_{\tau_{1}, {\rm L}} x_{\tau_{2}, {\rm R}} \right) \hrho{S}(0) \\
+		&\quad - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \alpha_{\rm I}(\tau_{1} - \tau_{2}) \left( - x_{\tau_{1}, {\rm L}} x_{\tau_{2}, {\rm R}} - x_{\tau_{1}, {\rm R}} x_{\tau_{2}, {\rm L}} + x_{\tau_{1}, {\rm L}} x_{\tau_{2}, {\rm L}} + x_{\tau_{1}, {\rm L}} x_{\tau_{2}, {\rm R}} \right) \hrho{S}(0) \\
+		&= \left[ \sop{I}{} - \dfrac{i}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \left( x_{\tau_{1}, {\rm L}} - x_{\tau_{1}, {\rm R}} \right) \alpha_{\rm I}(\tau_{1} - \tau_{2}) \left( x_{\tau_{2}, {\rm L}} + x_{\tau_{2}, {\rm R}} \right) \right. \\
+		&\quad \left. - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} \left( x_{\tau_{1}, {\rm L}} - x_{\tau_{1}, {\rm R}} \right) \alpha_{\rm I}(\tau_{1} - \tau_{2}) \left( x_{\tau_{2}, {\rm L}} - x_{\tau_{2}, {\rm R}} \right) \right] \hrho{S}(0) \\
+		&= \left[ \sop{I}{} - \dfrac{i}{\hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} x_{\tau_{1}, \Delta} \alpha_{\rm I}(\tau_{1} - \tau_{2}) x_{\tau_{2}, {\rm c}} - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2} \sop{T}{} x_{\tau_{1}, \Delta} \alpha_{\rm I}(\tau_{1} - \tau_{2}) x_{\tau_{2}, \Delta} \right] \hrho{S}(0) \\
+\end{split}
+\end{equation}
+となる。したがって、
+\begin{equation}
+\begin{split}
+\label{eq:512}
+	\hrho{I,S}(t) &= \sop{K}{t} \hrho{S}(0) \\
+		&= \sop{T}{} {\rm exp} \left[ - \dfrac{i}{\hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  \left(x_{\tau_{2}, {\rm L}} - x_{\tau_{2}, {\rm R}}\right) \alpha_{\rm I} \left(\tau_{1} - \tau_{2} \right) \left(x_{\tau_{2}, {\rm L}} + x_{\tau_{2}, {\rm R}}\right) \right. \\
+		&\qquad \left. - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  \left(x_{\tau_{2}, {\rm L}} - x_{\tau_{2}, {\rm R}}\right) \alpha_{\rm R} \left(\tau_{1} - \tau_{2} \right) \left(x_{\tau_{2}, {\rm L}} - x_{\tau_{2}, {\rm R}}\right) \right] \hrho{S}(0) \\
+		&= \sop{T}{} \exp{- \dfrac{i}{\hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  x_{\tau_{1}, \Delta} \alpha_{\rm I} \left(\tau_{1} - \tau_{2} \right) x_{\tau_{2}, {\rm c}} - \dfrac{1}{2 \hbar} \integ{0}{t} d\tau_{1} \integ{0}{t} d\tau_{2}  x_{\tau_{1}, \Delta} \alpha_{\rm R} \left(\tau_{1} - \tau_{2} \right) x_{\tau_{2}, \Delta}} \hrho{S}(0)
+\end{split}
+\end{equation}
+を得る。
+
+\subsection{Derivation of \Eq{eq:223}}
+\label{sec:52}
+
+ここでは、\Eq{eq:223}の導出を行う。その準備として、coherent状態の以下の性質を証明する。
+\begin{equation}
+\begin{split}
+\label{eq:513}
+	\bra{\set{a_{k}}{}}{} \op{a}{k} \ket{\phi}{} = \left( \dfrac{a_{k}}{2} + \pdev{}{a_{k}^{*}} \right) \inner{\set{a_{k}}{}}{}{\phi}{}
+\end{split}
+\end{equation}
+
+\begin{proof}{\textbf{\Eq{eq:513}の証明}}
+
+	任意の状態$\ket{\phi}{}$について、$\bra{\alpha}{} \op{a}{} \ket{\phi}{}$を考える。ここで$\ket{\alpha}{}$はcoherent状態$\ket{\alpha}{} = \frac{1}{\sqrt{pi}} \e{- \abs{\alpha}^{2}/2} \sum_{n} \frac{\alpha^{n}}{\sqrt{n!}} \ket{n}{}$。いま、$\ket{\alpha}{} = \frac{1}{\sqrt{pi}} \e{- \abs{\alpha}^{2}/2} \e{\alpha \dop{a}{}} \ket{0}{}$と$\abs{\alpha}^{2} = \alpha * \alpha^{*}$より、$\partial_{\alpha} \ket{\alpha}{} = \left( - \alpha^{*}/2 + \dop{a}{} \right) \ket{\alpha}{}$が成り立つ。したがって、$\dop{a}{} \ket{\alpha}{} = \left( \alpha^{*}/2 + \partial_{\alpha} \right) \ket{\alpha}{}$。以上より、$\bra{\alpha}{} \dop{a}{} \ket{\phi}{} = \left( \alpha / 2 + \partial_{\alpha^{*}} \right) \inner{\alpha}{}{\phi}{}$が成り立つ。
+
+\end{proof}
+
+$\partial_{a_{k}^{*}} \ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S}$は
+\begin{equation}
+\begin{split}
+\label{eq:514}
+	\pdev{}{a_{k}^{*}} \ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S} &= \pdev{}{a_{k}^{*}}  \left( \dfrac{\inner{\set{a_{k}}{}}{}{\Phi_{\rm I}(t)}{}}{\Lambda \left( \set{a_{k}}{} \right)} \right) \\
+		&= \dfrac{\partial_{a_{k}^{*}} \inner{\set{a_{k}}{}}{}{\Phi_{\rm I}(t)}{}}{\Lambda \left( \set{a_{k}}{} \right)} + \dfrac{1}{2} \dfrac{\partial_{a_{k}^{*}} \Lambda \left( \set{a_{k}}{} \right)}{\Lambda \left( \set{a_{k}}{} \right)} \ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S} \\
+		&= \dfrac{a_{k}}{2} \ket{\tilde{\psi}_{{\rm I}, \set{a_{k}}{}}(t)}{S} + \dfrac{\partial_{a_{k}^{*}} \inner{\set{a_{k}}{}}{}{\Phi_{\rm I}(t)}{}}{\Lambda \left( \set{a_{k}}{} \right)}
+\end{split}
+\end{equation}
+となるので、\Eq{eq:513}を用いると\Eq{eq:223}が得られる。
+
+
+\end{document}
+
