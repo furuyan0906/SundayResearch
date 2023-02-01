@@ -15,15 +15,6 @@ SRCS := $(shell find $(SRC_DIR) -name "*.tex")
 OBJS := $(SRCS:%=$(OBJ_DIR)/%.dvi)
 
 # -------------------------------------------------
-CXXFLAGS := -g -O2 -std=c++2a -Wall -MMD -MP
-
-LDFLAGS := $(LINK_PATH) $(LIBS) $(THIDR_LIBS)
-TEST_LDFLAGS := $(TEST_LINK_PATH) $(TEST_LIBS)
-
-CPPFLAGS := $(DEFINES) $(INCLUDE)
-TEST_CPPFLAGS := $(TEST_DEFINES) $(TEST_INCLUDE)
-
-# -------------------------------------------------
 TEX2DVI := platex
 DVI2PDF := dvipdfmx
 
